@@ -10,7 +10,7 @@
       <ul>
         <li v-for="(item, index) in cart" :key="index">
           <div>
-            <img :src="item.img" :alt="item.name">
+            <img :src="item.image" :alt="item.name" />
           </div>
           <div>
             <p>{{ item.name }}</p>
@@ -19,7 +19,10 @@
               <strong>${{ item.price * item.quantity }}</strong>
             </p>
           </div>
-          <button class="text-[var(--dark-grayish-blue)]" @click.prevent="emit('remove-item', item)">
+          <button
+            class="text-[var(--dark-grayish-blue)]"
+            @click.prevent="emit('remove-item', item)"
+          >
             <IconDelete />
           </button>
         </li>

@@ -9,7 +9,18 @@ import Navbar from './components/Navbar.vue'
 import Cart from './components/Cart.vue'
 
 const isCartOpen = ref(false)
-const cart = ref(['', ''])
+const cart = ref([])
+
+const product = {
+  company: 'Sneaker Company',
+  name: 'Fall Limited Edition Sneakers',
+  description:
+    'These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.',
+
+  image: '/images/image-product-1-thumbnail.jpg',
+  price: 250.0,
+  discount: 0.5,
+}
 
 const toggleCart = () => {
   isCartOpen.value = !isCartOpen.value
