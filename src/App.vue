@@ -86,7 +86,7 @@ import IconNext from './components/icons/IconNext.vue'
 
 const isMenuOpen = ref(false)
 const isCartOpen = ref(false)
-const cart = ['','','']
+const cart = []
 const menu = ['Collections', 'Men', 'Women', 'About', 'Contact']
 
 const openMenu = () => {
