@@ -31,6 +31,11 @@
 @tailwind components;
 @tailwind utilities;
 
+#app {
+  max-width: 1200px;
+  margin: auto;
+}
+
 nav a {
   position: relative;
   transition: all 0.5ms ease-in-out;
