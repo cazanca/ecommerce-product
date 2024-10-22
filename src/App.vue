@@ -1,7 +1,13 @@
 <template>
   <Navbar @toggle-cart="toggleCart" :cart-length="cart.length" />
   <Cart :is-open="isCartOpen" :cart="cart" @remove-item="removeFromCart" />
-  <ProductDisplay :product="product" @add-to-cart="addToCart" />
+  <ProductDisplay
+    :product="product"
+    :quantity="quantity"
+    @increment="increment"
+    @decrement="decrement"
+    @add-to-cart="addToCart(product)"
+  />
 </template>
 
 <script setup>
@@ -12,6 +18,19 @@ import ProductDisplay from './components/ProductDisplay.vue'
 
 const isCartOpen = ref(false)
 const cart = ref([])
+const quantity = ref(1)
+
+const increment = () => {
+  quantity.value += 1
+}
+
+const decrement = () => {
+  if (quantity.value > 1) {
+    quantity.value -= 1
+  } else {
+    alert('You reach the minimum value required')
+  }
+}
 
 const product = {
   company: 'Sneaker Company',
@@ -20,6 +39,12 @@ const product = {
     'These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.',
 
   image: '/images/image-product-1-thumbnail.jpg',
+  slides: [
+    { image: '/images/image-product-1.jpg', alt: 'Product 1' },
+    { image: '/images/image-product-2.jpg', alt: 'Product 2' },
+    { image: '/images/image-product-3.jpg', alt: 'Product 3' },
+    { image: '/images/image-product-4.jpg', alt: 'Product 4' },
+  ],
   price: 250.0,
   discount: 0.5,
 }
@@ -27,18 +52,22 @@ const product = {
 const toggleCart = () => {
   isCartOpen.value = !isCartOpen.value
 }
+
 const closeCart = () => {
   isCartOpen.value === true ? (isCartOpen.value = false) : null
 }
 
 const addToCart = product => {
-  // se der erro, adicione .value no cart => exemplo cart.value.find o«e itemInCart.value.quantity
   const itemInCart = cart.value.find(item => item.id === product.id)
-
+  /*
   if (itemInCart) {
     itemInCart.quantity++
   } else {
-    cart.value.push({ ...product, quantity: 1 })
+    cart.value.push({ ...product, quantity })
+  }
+*/
+  if (!itemInCart) {
+    cart.value.push({ ...product, quantity })
   }
 }
 
@@ -47,11 +76,12 @@ const removeFromCart = product => {
 
   if (index !== -1) {
     // se o item estiver no carrinho
-    if (cart.value[index].quantity > 1) {
+    cart.value.splice(index, 1)
+    /*if (cart.value[index].quantity > 1) {
       cart.value[index].quantity--
     } else {
       cart.value.splice(index, 1)
-    }
+    }*/
   }
 }
 
