@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article class="md:grid md:grid-cols-2 md:items-center md:gap-x-16 md:mt-14 md:w-[90%] md:mx-auto">
     <div
       class="relative w-full mx-auto overflow-hidden"
       id="carousel-container"
@@ -14,7 +14,7 @@
           ]"
           v-show="currentSlide == index"
         >
-          <img :src="slide.image" :alt="slide.alt" />
+          <img :src="slide.image" :alt="slide.alt" class="rounded-2xl cursor-pointer" />
         </div>
       </div>
 
@@ -43,7 +43,7 @@
       >
         {{ product.name }}
       </h1>
-      <p class="mt-2 text-[var(--dark-grayish-blue)]">
+      <p class="mt-2 text-[var(--dark-grayish-blue)] md:leading-7">
         {{ product.description }}
       </p>
       <div class="flex mt-4 gap-4 items-center">
@@ -60,21 +60,32 @@
         </p>
       </div>
 
-      <div
-        class="bg-[var(--light-grayish-blue)] rounded-md mt-6 p-2 px-4 flex items-center justify-between"
-      >
-        <button @click.prevent="emit('decrement')" class="text-[var(--orange)]">
-          <IconMinus />
-        </button>
-        <p class="font-semibold">{{ quantity }}</p>
-        <button @click.prevent="emit('increment')" class="text-[var(--orange)]">
-          <IconPlus />
-        </button>
+      <div class="md:flex md:items-center md:space-x-4 md:mt-8">
+        <div
+          class="bg-[var(--light-grayish-blue)] rounded-md mt-6 p-2 px-4 flex items-center justify-between md:gap-10 md:mt-0 md:px-2"
+        >
+          <button
+            @click.prevent="emit('decrement')"
+            class="text-[var(--orange)] p-2.5"
+          >
+            <IconMinus />
+          </button>
+          <p class="font-semibold">{{ quantity }}</p>
+          <button
+            @click.prevent="emit('increment')"
+            class="text-[var(--orange)] p-2.5"
+          >
+            <IconPlus />
+          </button>
+        </div>
+        <JButton
+          class="mt-8 md:mt-0 md:py-2.5"
+          @click.prevent="emit('add-to-cart')"
+        >
+          <IconCart />
+          <p>Add to cart</p>
+        </JButton>
       </div>
-      <JButton class="mt-8" @click.prevent="emit('add-to-cart')">
-        <IconCart />
-        <p>Add to cart</p>
-      </JButton>
     </div>
   </article>
 </template>
@@ -123,7 +134,7 @@ onMounted(() => {
 
 <style>
 .carousel-control {
-  @apply absolute top-1/2 bg-white cursor-pointer text-sm rounded-full w-8 h-8 flex items-center justify-center p-1;
+  @apply absolute top-1/2 bg-white cursor-pointer text-sm rounded-full w-8 h-8 flex items-center justify-center p-1 md:hidden;
 }
 
 .next {
