@@ -5,7 +5,7 @@
     <nav class="w-full flex items-center justify-between">
       <div class="flex items-center gap-x-6 md:gap-x-14">
         <button
-          class="md:hidden text-[var(--dark-grayish-blue)]"
+          class="md:hidden cursor-pointer text-[var(--dark-grayish-blue)]"
           @click.prevent="openMenu"
         >
           <IconMenu />
@@ -46,7 +46,7 @@
           <IconCart />
         </button>
         <div
-          class="w-[30px] md:w-[50px] hover:border-2 rounded-full border-[var(--orange)]"
+          class="w-[30px] md:w-[50px] hover:ring-2 rounded-full ring-[var(--orange)]"
         >
           <img src="/images/image-avatar.png" class="w-full" alt="avatar" />
         </div>

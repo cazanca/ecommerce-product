@@ -1,12 +1,14 @@
 <template>
   <Navbar @toggle-cart="toggleCart" :cart-length="cart.length" />
   <Cart :is-open="isCartOpen" :cart="cart" @remove-item="removeFromCart" />
+  <ProductDisplay :product="product" @add-to-cart="addToCart" />
 </template>
 
 <script setup>
 import { ref, provide } from 'vue'
 import Navbar from './components/Navbar.vue'
 import Cart from './components/Cart.vue'
+import ProductDisplay from './components/ProductDisplay.vue'
 
 const isCartOpen = ref(false)
 const cart = ref([])
