@@ -7,6 +7,12 @@
     @increment="increment"
     @decrement="decrement"
     @add-to-cart="addToCart(product)"
+    @open-lightbox="openLightBox"
+  />
+  <LightBox
+    :is-open="isLightBoxOpen"
+    :product="product"
+    @close-lightbox="closeLightBox"
   />
 </template>
 
@@ -15,8 +21,10 @@ import { ref, provide } from 'vue'
 import Navbar from './components/Navbar.vue'
 import Cart from './components/Cart.vue'
 import ProductDisplay from './components/ProductDisplay.vue'
+import LightBox from './components/LightBox.vue'
 
 const isCartOpen = ref(false)
+const isLightBoxOpen = ref(false)
 const cart = ref([])
 const quantity = ref(1)
 
@@ -45,12 +53,38 @@ const product = {
     { image: '/images/image-product-3.jpg', alt: 'Product 3' },
     { image: '/images/image-product-4.jpg', alt: 'Product 4' },
   ],
+  thumbnails: [
+    {
+      image: '/images/image-product-1-thumbnail.jpg',
+      alt: 'Product 1 thumbnail',
+    },
+    {
+      image: '/images/image-product-2-thumbnail.jpg',
+      alt: 'Product 2 thumbnail',
+    },
+    {
+      image: '/images/image-product-3-thumbnail.jpg',
+      alt: 'Product 3 thumbnail',
+    },
+    {
+      image: '/images/image-product-4-thumbnail.jpg',
+      alt: 'Product 4 thumbnail',
+    },
+  ],
   price: 250.0,
   discount: 0.5,
 }
 
 const toggleCart = () => {
   isCartOpen.value = !isCartOpen.value
+}
+
+const openLightBox = () => {
+  isLightBoxOpen.value = true
+}
+
+const closeLightBox = () => {
+  isLightBoxOpen.value = false
 }
 
 const closeCart = () => {
